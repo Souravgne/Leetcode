@@ -1,0 +1,40 @@
+class TimeMap {
+public:
+        
+        unordered_map<string , vector<pair<int , string>>> seen;
+    TimeMap() {
+        
+    }
+    
+    void set(string key, string value, int timestamp) {
+        seen[key].push_back({timestamp, value});
+            
+    }
+    
+    string get(string key, int timestamp) {
+        if(seen.find(key) == seen.end()){
+                return "";
+        }        
+            int s =0 ;
+            int e = seen[key].size()-1;
+            if(seen[key][0].first>timestamp ){
+                    return "";
+            }
+            
+
+            string ans ;
+            while(s<=e){
+                    int mid  = s +(e-s)/2;
+                    if(seen[key][mid].first == timestamp){
+return seen[key][mid].second;}
+                    if(seen[key][mid].first< timestamp){
+                            ans = seen[key][mid].second;
+                            s = mid+1;
+                    }
+                    if(seen[key][mid].first> timestamp){
+                            e= mid-1;
+                    }
+            }
+            return ans;
+    }
+};
