@@ -1,14 +1,15 @@
 class Solution {
 public:
-    bool checkIfPangram(string s) {
-            int n = s.size()-1;
+    bool checkIfPangram(string sentence) {
+            map<char, int> v;
+        for(int i =0 ; i<sentence.size();i++){
+                v[sentence[i]]++;
+        }
             
-for(int i =0 ; i<26;i++){
-        char ch = 'a'+i;
-       if(s.find(ch)== string::npos){
-               return false;
-       }
-}            
-        return true;    
+            if(v.size()== 26){
+                    return true;
+                    
+            }
+            else return false;
     }
 };
