@@ -2,29 +2,36 @@
 class Solution {
 public:
     
-    int height(TreeNode* root){
+    pair<bool , int> helper(TreeNode* root){
+        if(root== NULL){
+            pair<bool,int> p = make_pair(true, 0);
+            return p;
+        }
         
-        if(root==NULL)return 0;
+        pair<bool , int> left= helper(root->left);
+        pair<bool, int> right= helper(root->right);
         
-        int left = height(root->left);
-        int right = height(root->right);
-            return max(left, right)+1;
+        bool leftans = left.first;
+        bool rightans = right.first;
+        
+        bool diff = abs(left.second -right.second)<=1;
+        
+        pair<bool , int> ans;
+        ans.second = max(left.second , right.second)+1;
+        
+        if(leftans && rightans && diff){
+            ans.first = true;
+        }
+        else{
+            ans.first = false;
+        }
         
         
+        
+        return ans;
         
     }
     bool isBalanced(TreeNode* root) {
-        
-        if(root==NULL) return true;
-        
-        bool l= isBalanced(root->left);
-        bool r= isBalanced(root->right);
-        int left = height(root->left);
-        int right = height(root->right);
-        
-        if(l&& r&& abs(left-right)<=1)
-        return true;
-        else return false;
-        
+        return helper(root).first;
     }
 };
