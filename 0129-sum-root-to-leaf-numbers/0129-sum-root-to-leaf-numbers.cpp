@@ -17,21 +17,12 @@ public:
         num = 10*num+root->val;
         if(root->left == NULL&& root->right==NULL){
             sum+=num;
-            
-        
         }
         solve(root->left , sum , num);
         solve(root->right , sum , num );
         num/=10;
-        
-        
-       
     }
-    
-    
-    
     int sumNumbers(TreeNode* root) {
-     
         int sum =0, num =0;
         solve(root, sum ,num);
         return sum;
