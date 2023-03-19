@@ -12,28 +12,19 @@
 class Solution {
 public:
     
-    TreeNode* solve(TreeNode* &root , int data){
+    TreeNode* solve(vector<int>& preorder , int min , int max , int &i){
+        if(i>=preorder.size())return NULL;
+        if(preorder[i]< min || preorder[i]> max)return NULL;
         
-        if(root == NULL){
-            root = new TreeNode(data);
-            return root;
-        }
-        
-        if(data < root->val){
-            root->left = solve(root->left , data);
-        }
-        else{
-            root->right = solve(root->right , data);
-        }
+        TreeNode* root = new TreeNode(preorder[i++]);
+        root->left = solve(preorder ,min , root->val , i);
+        root->right = solve(preorder , root->val , max ,i);
         return root;
     }
     TreeNode* bstFromPreorder(vector<int>& preorder) {
-        int i =0 ; 
-        TreeNode* root =NULL;
-        while(i< preorder.size()){
-            root= solve(root , preorder[i++]);
-        }
-        return root;
+        int i=0;
+     return   solve(preorder , INT_MIN , INT_MAX ,i);
+        
         
     }
 };
