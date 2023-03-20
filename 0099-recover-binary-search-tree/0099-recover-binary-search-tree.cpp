@@ -11,38 +11,31 @@
  */
 class Solution {
 public:
-     TreeNode* first , *second, *prev;
-    void solve(TreeNode* root){
-        if(root==NULL )return ;
-          
-        
-        solve(root->left);
-        
-        if(prev ->val > root->val){
-            
+    TreeNode* first , *second , * prev;
+    
+    
+    void inorder(TreeNode* root){
+        if(root==NULL)return ;
+        inorder(root->left);
+        if(prev->val > root->val){
             if(first->val ==0){
                 first = prev;
             }
-            if(first!=0){
-               second = root; 
-            }
             
-            // prev->val = root->val;
-            
+     if(first->val!=0)  {
+            second = root;
+        }
         }
         prev = root;
-        solve(root->right );
-        
+        inorder(root->right);
     }
-    void recoverTree(TreeNode* root) {
     
-        first =new TreeNode(0);
-       second = new TreeNode(0);
-         prev = new TreeNode(INT_MIN);
-        
-      solve(root);
-        
-        swap(first->val , second->val);
+    void recoverTree(TreeNode* root) {
+        prev = new TreeNode(INT_MIN);
+         first = new TreeNode(0);
+         second = new TreeNode(0);
+        inorder(root);
+        swap(first->val , second ->val);
         
     }
 };
