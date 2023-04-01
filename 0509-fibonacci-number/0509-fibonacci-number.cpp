@@ -1,18 +1,13 @@
 class Solution {
 public:
-    
-    int fibonacii(int n , vector<int>& ans){
-        if(n<=1)return n;
-        if(ans[n]!=-1)return ans[n];
-        ans[n] = fibonacii(n-1 , ans) +fibonacii(n-2 , ans);
-        return ans[n];
-    }
     int fib(int n) {
-        if(n==1 || n==0)return n;
+        if(n==0)return 0;
         vector<int> ans(n+1);
-        for(int i =0 ; i<=n ; i++){
-            ans[i]= -1;
+        ans[0]=0;
+        ans[1]=1;
+        for(int i =2;i<=n;i++){
+            ans[i]= ans[i-1]+ans[i-2];
         }
-        return fibonacii(n , ans);
+        return ans[n];
     }
 };
